@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario de Login</title>
+    <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+    <div class="container">
+        <h2>Iniciar Sesión</h2>
+        <form id="loginForm" onsubmit="return validateForm('login')">
+            <label for="username">Usuario:</label>
+            <input type="email" id="username" name="username" required>
+            
+            <label for="password">Contraseña:</label>
+            <input type="password" id="password" name="password" required minlength="6">
+            
+            <button type="submit">Iniciar Sesión</button>
+        </form>
+        <p>¿No tienes una cuenta? <a href="register.html">Regístrate aquí</a></p>
+    </div>
+    <script src="../Javascript/scripts.js"></script>
+    <script>
+        // Verificar si el usuario ya ha iniciado sesión
+        document.addEventListener("DOMContentLoaded", function() {
+            var xhr = new XMLHttpRequest();
+            xhr.open("GET", "../Php/check_session.php", true);
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    var response = JSON.parse(xhr.responseText);
+                    if (response.status === "success") {
+                        alert("Bienvenido de nuevo, " + response.user + "!");
+                        window.location.href = "bienvenido.html";
+                    }
+                }
+            };
+            xhr.send();
+        });
+    </script>
+</body>
+</html>

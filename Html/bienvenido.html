@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bienvenido</title>
+    <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+    <div class="container">
+        <h2>Bienvenido</h2>
+        <p id="bienvenidoMessage"></p>
+        <button id="logoutButton" onclick="logout()">Cerrar sesión</button>
+    </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            var user = localStorage.getItem("user");
+            if (user) {
+                document.getElementById("bienvenidoMessage").textContent = "Bienvenido, " + user + "!";
+            } else {
+                window.location.href = "index.html";
+            }
+        });
+
+        function logout() {
+            localStorage.removeItem("user");
+            window.location.href = "index.html";
+        }
+    </script>
+</body>
+</html>
